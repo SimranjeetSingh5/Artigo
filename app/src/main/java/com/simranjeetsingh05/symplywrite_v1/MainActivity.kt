@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity(), INotesRVA {
 
     lateinit var viewModel: NoteViewModel
-    val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-    val input: EditText = findViewById(R.id.input)
+    private val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+    private val input: EditText = findViewById(R.id.input)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), INotesRVA {
 
         viewModel = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
-        viewModel.allnotes.observe(this, Observer {list-> list?.let {
+        viewModel.allNotes.observe(this, Observer {list-> list?.let {
             adapter.updateList(it)
         }
 
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), INotesRVA {
         val noteText = input.text.toString()
         if(noteText.isNotEmpty()){
             viewModel.insertNote(Note(noteText))
-            Toast.makeText(this,"${noteText} Inserted",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"$noteText Inserted",Toast.LENGTH_LONG).show()
         }
     }
 

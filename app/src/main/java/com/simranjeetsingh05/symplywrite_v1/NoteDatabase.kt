@@ -12,13 +12,14 @@ abstract class NoteDatabase : RoomDatabase() {
     abstract fun getNoteDao(): NoteDao
 
     companion object{
-        @Volatile
-        private var INSTANCE: NoteDatabase? = null
+
+        @Volatile           //for immediate visibilty of data
+        private var INSTANCE: NoteDatabase? = null //for having a single instance of a class(Singleton class)
 
         fun getDatabase(context: Context): NoteDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
+            return INSTANCE ?: synchronized(this) { //protected from concurrent execution
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     NoteDatabase ::class.java,

@@ -9,13 +9,13 @@ import kotlinx.coroutines.launch
 
 abstract class NoteViewModel(application: Application): AndroidViewModel(application) {
 
-    val allnotes: LiveData<List<Note>>
+    val allNotes: LiveData<List<Note>>
     private val repository: NoteRepository
 
     init {
         val dao = NoteDatabase.getDatabase(application).getNoteDao()
         repository = NoteRepository(dao)
-        allnotes = repository.allNotes
+        allNotes = repository.getAllNotes
     }
 
     //Coroutine scope....A suspend can only be called using suspend or other coroutineSCope
