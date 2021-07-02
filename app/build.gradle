@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -11,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.simranjeetsingh05.symplywrite_v1"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -70,4 +71,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
+
+    //Core KTX
+    implementation "androidx.core:core-ktx:1.6.0"
 }

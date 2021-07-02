@@ -3,20 +3,18 @@ package com.simranjeetsingh05.symplywrite_v1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
+
 
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), INotesRVA {
 
     lateinit var viewModel: NoteViewModel
-    private val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-    private val input: EditText = findViewById(R.id.input)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +24,13 @@ class MainActivity : AppCompatActivity(), INotesRVA {
         val adapter = NotesRVA(this,this)
         recyclerView.adapter = adapter
 
-        viewModel = ViewModelProvider(this,
+        ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
         viewModel.allNotes.observe(this, Observer {list-> list?.let {
             adapter.updateList(it)
         }
 
         })
-
-
     }
 
     override fun onItemClicked(note: Note) {
